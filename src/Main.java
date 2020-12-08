@@ -13,10 +13,11 @@ public class Main {
 //        int inputuser = input.nextInt();
         Sapi sapi;
         sapi = new Sapi(5, 10);
-        for (int tahun = 1; tahun <= 5; tahun++) {
-            System.out.println("Ini adalah tahun ke "+ tahun +" ================================ ");
+        for (int tahun = 1; tahun <= 8; tahun++) {
+            System.out.println(" tahun ke - "+ tahun +" ================================ ");
             sapi.gantiTahun();
             sapi.nambahUmur();
+            sapi.nambahUmurAnak();
             sapi.display();
 
         }

@@ -15,9 +15,12 @@ import java.util.*;
 
 public class Sapi {
     private final Random acak = new Random();
-    int[] umursapi;
-    //    int[] umuranaksapi;
-    String[] jeniskelaminanaksapi;
+    public int[] umursapi;
+    public int[] umuranaksapi;
+    public String[] jeniskelaminanaksapi;
+    //    private boolean lahir;
+    public String kelamin;
+    public int n;
     boolean[] jeniskelanaksapi;
     String[] jeniskelamin;
     boolean[] jeniskel;
@@ -26,8 +29,6 @@ public class Sapi {
 //    private int jumlahjantan;
     int jumlahsaatini = 0;
     private boolean mati;
-    //    private boolean lahir;
-    private String kelamin;
     private int umur;
     private int tahun;
     private int anak;
@@ -54,24 +55,23 @@ public class Sapi {
 
     }
 
-    public Sapi(int anak) {
-        int[] umuranaksapi;
-        String[] jeniskelaminanaksapi;
+
+    public void Sapi(String kelamin) {
+
+//        String[] jeniskelaminanaksapi;
         jeniskelaminanaksapi = new String[anak];
         umuranaksapi = new int[anak];
         jeniskelanaksapi = new boolean[anak];
-        int n = anak;
+        int n = anak - 1;
 
-        for (int i = 0; i <= n - 1; i++) {
-            if (kelamin == "jantan") {
-                jeniskelaminanaksapi[i] = "jantan";
-                jeniskelanaksapi[i] = false;
-                umuranaksapi[i] = 0;
-            } else {
-                jeniskelaminanaksapi[i] = "betina";
-                jeniskelanaksapi[i] = true;
-                umuranaksapi[i] = 0;
-            }
+        if (kelamin == "jantan") {
+            jeniskelaminanaksapi[n] = "jantan";
+            jeniskelanaksapi[n] = false;
+
+        } else {
+            jeniskelaminanaksapi[n] = "betina";
+            jeniskelanaksapi[n] = true;
+            umuranaksapi[n] = 0;
         }
 
     }
@@ -126,11 +126,11 @@ public class Sapi {
         return subur;
     }
 
-    public void melahirkan() {
+    public String melahirkan() {
         boolean subur = masaSubur(umur);
         if (subur) {
             int variabel = acak.nextInt(100);
-            if (variabel >= 60) {
+            if (variabel <= 60) {
 //                lahir = false;
                 kelamin = "jantan";
             } else {
@@ -139,13 +139,9 @@ public class Sapi {
             }
 
         }
+        return kelamin;
     }
 
-    public void nambahUmur() {
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            umursapi[i] += 1;
-        }
-    }
 
     public void gantiTahun() {
 
@@ -157,20 +153,49 @@ public class Sapi {
             }
         }
 
+        System.out.println();
+        for (int i = 0; i < jeniskelamin.length; i++) {
+            int n = i + 1;
+            if (jeniskelamin[i].equals("mati")) {
+                System.out.println("sapi ke " + n + " sudah mati ");
+//                continue;
+            } else {
+                System.out.println("sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
+                n = 0;
+            }
+
+        }
+        System.out.println();
+
         for (int i = 0; i < jeniskelamin.length; i++) {
             boolean keadaan = masaSubur(umursapi[i]);
             if (keadaan) {
-                melahirkan();
+                kelamin = melahirkan();
                 if (kelamin.equals("jantan")) {
                     anak += 1;
-                    System.out.println("jantan");
+                    System.out.println("lahir anak jantan");
                 } else {
                     anak += 1;
-                    System.out.println("betina");
+                    System.out.println("lahir anak betina");
                 }
+                n = anak - 1;
+                Sapi(kelamin);
+                umuranaksapi[n] = 1;
             }
         }
 
+    }
+
+    public void nambahUmurAnak() {
+        for (int i = 0; i < anak; i++) {
+            umuranaksapi[i] += 1;
+        }
+    }
+
+    public void nambahUmur() {
+        for (int i = 0; i < jeniskelamin.length; i++) {
+            umursapi[i] += 1;
+        }
     }
 
 //    public int hitung() {
@@ -185,32 +210,34 @@ public class Sapi {
 
     public void display() {
 
-
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            int n = i + 1;
-            if (jeniskelamin[i].equals("mati")) {
-                System.out.println("sapi ke " + n + " sudah mati ");
-            } else {
-                System.out.println("sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
-                n = 0;
-            }
-
-        }
+//        System.out.println();
+//        for (int i = 0; i < jeniskelamin.length; i++) {
+//            int n = i + 1;
+//            if (jeniskelamin[i].equals("mati")) {
+//                System.out.println("sapi ke " + n + " sudah mati ");
+//                continue;
+//            } else {
+//                System.out.println("sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
+//                n = 0;
+//            }
+//
+//        }
 
         System.out.println();
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            int n = i + 1;
-
-            System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
-            n = 0;
-        }
+//        System.out.println();
+//        for (int i = 0; i < jeniskelamin.length; i++) {
+//            int n = i + 1;
+//
+//            System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
+//            n = 0;
+//        }
 
         for (int i = 0; i < jeniskelamin.length; i++) {
             int n = i + 1;
             if (jeniskelamin[i].equals("mati")) {
                 continue;
             } else {
-                jumlahsaatini += 1;
+//                jumlahsaatini += 1;
                 System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
 
                 n = 0;
@@ -220,8 +247,8 @@ public class Sapi {
 
         try {
             for (int i = 0; i < anak; i++) {
-                int n = i;
-                System.out.println("sapi ke " + n + " jenis kel  " + jeniskelanaksapi[i]);
+                int n = i + 1;
+                System.out.println("Anak sapi ke  " + i + " berjenis kelamin  " + jeniskelaminanaksapi[i]);
             }
         } catch (Exception e) {
             System.out.println();
@@ -229,14 +256,14 @@ public class Sapi {
         }
 
 
-//            for (int i = 0; i < anak; i++) {
-//                int n = i +1;
-//                System.out.println("Anak sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
-//                n = 0;
-//            }
+        for (int i = 0; i < anak; i++) {
+            int n = i + 1;
+            System.out.println("Anak sapi ke " + n + " berjenis kelamin " + umuranaksapi[i]);
+            n = 0;
+        }
 //            for (int i = 0; i < jeniskelamin.length; i++) {
 //                int n = i +1;
-//                System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
+//                System.out.println("sapi ke " + n + " Berumur  " + umuranaksapi[i]);
 //                n = 0;
 //            }
 //            for (int i = 0; i < jeniskelamin.length; i++) {
@@ -247,7 +274,6 @@ public class Sapi {
         System.out.println();
 
     }
-
 
 
 }
