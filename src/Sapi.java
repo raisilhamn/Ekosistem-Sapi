@@ -1,253 +1,171 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.util.*;
-/* Sapi betina setiap tahun ber anak satu dengan prob jantan / betina sesuai ketentuan
- * Prob mati usia ke 6 : 0.2
- *
- *  boolean jantan = false;
-    boolean betina = true;
- *
- */
+
 
 public class Sapi {
-    private final Random acak = new Random();
-    int[] umursapi;
-    //    int[] umuranaksapi;
-    String[] jeniskelaminanaksapi;
-    boolean[] jeniskelanaksapi;
-    String[] jeniskelamin;
-    boolean[] jeniskel;
-    boolean subur = false;
-    //    private int jumlahbetina;
-//    private int jumlahjantan;
-    int jumlahsaatini = 0;
-    private boolean mati;
-    //    private boolean lahir;
-    private String kelamin;
-    private int umur;
-    private int tahun;
-    private int anak;
-    private boolean[] populasisapi;
+
+    boolean mati;
+    String jenisKelamin;
+    int umur;
+    boolean subur;
+    int jeniskel;
 
 
-    public Sapi(int jumlahjantan, int jumlahbetina) {
-        jeniskelamin = new String[jumlahjantan + jumlahbetina];
-        umursapi = new int[jumlahjantan + jumlahbetina];
-        jeniskel = new boolean[jumlahjantan + jumlahbetina];
-        int n = jumlahjantan + jumlahbetina;
-
-        for (int i = 0; i < jumlahjantan; i++) {
-            jeniskelamin[i] = "jantan";
-            jeniskel[i] = false;
-            umursapi[i] = 0;
-        }
-
-        for (int i = jumlahjantan; i < n; i++) {
-            jeniskelamin[i] = "betina";
-            jeniskel[i] = true;
-            umursapi[i] = 0;
-        }
+    public Sapi(String jenisKelamin) {
+        this.jenisKelamin = jenisKelamin;
+        this.umur = 0;
+        this.subur = false;
+        this.mati = false;
 
     }
 
-    public Sapi(int anak) {
-        int[] umuranaksapi;
-        String[] jeniskelaminanaksapi;
-        jeniskelaminanaksapi = new String[anak];
-        umuranaksapi = new int[anak];
-        jeniskelanaksapi = new boolean[anak];
-        int n = anak;
-
-        for (int i = 0; i <= n - 1; i++) {
-            if (kelamin == "jantan") {
-                jeniskelaminanaksapi[i] = "jantan";
-                jeniskelanaksapi[i] = false;
-                umuranaksapi[i] = 0;
-            } else {
-                jeniskelaminanaksapi[i] = "betina";
-                jeniskelanaksapi[i] = true;
-                umuranaksapi[i] = 0;
-            }
+    public static ArrayList<Sapi> kandang(String jenisKelamin, int ada) {
+        ArrayList<Sapi> kandang = new ArrayList<>();
+        for (int i = 0; i < ada; i++) {
+            Sapi anak = new Sapi(jenisKelamin);
+            kandang.add(anak);
         }
-
+        return kandang;
     }
 
+    public static int probangka() {
+        Random rn = new Random();
+        int hasil = rn.nextInt(10);
+//        0->9 ,, 0.5 : 5
+        return hasil;
+    }
 
-    public boolean kemungkinanMati(int umur) {
-        double probmati;
-        switch (umur) {
+    public static int getProbmati(Sapi sapi) {
+        int probmati;
+        switch (sapi.umur) {
             case 0:
-                probmati = 0.0;
+                probmati = 0;
                 break;
             case 1:
-                probmati = 0.1;
+                probmati = 1;
                 break;
             case 2:
-                probmati = 0.1;
+                probmati = 1;
                 break;
             case 3:
-                probmati = 0.2;
+                probmati = 2;
                 break;
             case 4:
-                probmati = 0.2;
+                probmati = 2;
                 break;
             case 5:
-                probmati = 0.3;
+                probmati = 3;
                 break;
             case 6:
-                probmati = 0.3;
+                probmati = 3;
                 break;
             case 7:
-                probmati = 0.4;
+                probmati = 4;
                 break;
             case 8:
-                probmati = 0.5;
+                probmati = 5;
                 break;
             default:
-                probmati = 1.0;
+                probmati = 10;
                 break;
         }
-        if (probmati == 1.0)
-            mati = true;
-        else
-            mati = acak.nextDouble() < probmati;
-
-        return mati;
+        return probmati;
     }
 
-    public boolean masaSubur(int umur) {
-        if (umur >= 3 && umur <= 7) {
-            subur = true;
+    public boolean setMati(int prob) {
+        Random acak = new Random();
+        if (prob == 10)
+            this.mati = true;
+        else if (prob == 0)
+            this.mati = false;
+        else {
+            int hasil = acak.nextInt(10);
+            this.mati = hasil < prob;
         }
-        return subur;
+        return this.mati;
     }
 
-    public void melahirkan() {
-        boolean subur = masaSubur(umur);
-        if (subur) {
-            int variabel = acak.nextInt(100);
-            if (variabel >= 60) {
-//                lahir = false;
-                kelamin = "jantan";
-            } else {
-                kelamin = "betina";
-//                lahir = true;
-            }
-
+    public boolean masaSubur(Sapi sapi) {
+        if (sapi.jenisKelamin.equals("betina")){
+            if (sapi.umur >= 3 && sapi.umur <= 7) {
+                this.subur = true;
+            } else
+                this.subur = false;
         }
+        return this.subur;
     }
 
-    public void nambahUmur() {
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            umursapi[i] += 1;
-        }
-    }
+    public int melahirkan(Sapi sapi) {
+        if (sapi.mati == false) {
+            if (sapi.masaSubur(sapi)) {
+                if (sapi.jenisKelamin.equals("betina")) {
+                    Random acak = new Random();
+                    sapi.jeniskel = acak.nextInt(101);
+                    return sapi.jeniskel;
 
-    public void gantiTahun() {
-
-
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            boolean keadaan = kemungkinanMati(umursapi[i]);
-            if (keadaan) {
-                jeniskelamin[i] = "mati";
-            }
-        }
-
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            boolean keadaan = masaSubur(umursapi[i]);
-            if (keadaan) {
-                melahirkan();
-                if (kelamin.equals("jantan")) {
-                    anak += 1;
-                    System.out.println("jantan");
-                } else {
-                    anak += 1;
-                    System.out.println("betina");
                 }
             }
         }
-
+        return sapi.jeniskel = 102;
     }
 
-//    public int hitung() {
-//        for (int i = 0; i < jeniskelamin.length; i++) {
-//            if (jeniskelamin[i].equals("mati"))
-//                jumlahsaatini += 1;
+    public void nambahUmur(Sapi sapi) {
+        sapi.umur += 1;
+    }
+
+
+//    public Sapi melahirkanAnak() {
+//        Sapi anak;
+////        this.jumlahtotal = this.jumlahjantan + jumlahbetina;
+//        anak = new Sapi(this.jumlahlahirjantan, this.jumlahlahirbetina);
+//        return anak;
+//    }
+//
+//    public void anak() {
+//        for (int i = 0; i < umursapi.length; i++) {
+//            if (this.hidup[i] == false) {
+//                this.jumlahmati +=1;
+//                if (jeniskelamin[i].equals("jantan"))
+//                    jumlahjantan -=1;
+//                else
+//                    jumlahbetina
+
+//            } else {
+//
+//                if (masaSubur(this.umursapi[i])) {
+//                    melahirkan();
+//                    if (kelamin.equals("jantan"))
+//                        this.jumlahlahirjantan += 1;
+//                    else
+//                        this.jumlahlahirbetina += 1;
+//                }
+//
+//                this.jumlahlahirtotal = this.jumlahlahirjantan + jumlahlahirbetina;
+//                melahirkanAnak();
+//
+//            }
+//
 //        }
-//        System.out.println("Jumlah sapi ini " + jumlahsaatini);
-//        return jumlahsaatini;
+//
 //    }
 
 
-    public void display() {
-
-
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            int n = i + 1;
-            if (jeniskelamin[i].equals("mati")) {
-                System.out.println("sapi ke " + n + " sudah mati ");
-            } else {
-                System.out.println("sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
-                n = 0;
-            }
-
-        }
-
-        System.out.println();
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            int n = i + 1;
-
-            System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
-            n = 0;
-        }
-
-        for (int i = 0; i < jeniskelamin.length; i++) {
-            int n = i + 1;
-            if (jeniskelamin[i].equals("mati")) {
-                continue;
-            } else {
-                jumlahsaatini += 1;
-                System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
-
-                n = 0;
-            }
-
-        }
-
-        try {
-            for (int i = 0; i < anak; i++) {
-                int n = i;
-                System.out.println("sapi ke " + n + " jenis kel  " + jeniskelanaksapi[i]);
-            }
-        } catch (Exception e) {
-            System.out.println();
-            System.out.println("Eror di metod anak");
-        }
-
-
-//            for (int i = 0; i < anak; i++) {
-//                int n = i +1;
-//                System.out.println("Anak sapi ke " + n + " berjenis kelamin " + jeniskelamin[i]);
-//                n = 0;
-//            }
-//            for (int i = 0; i < jeniskelamin.length; i++) {
-//                int n = i +1;
-//                System.out.println("sapi ke " + n + " Berumur  " + umursapi[i]);
-//                n = 0;
-//            }
-//            for (int i = 0; i < jeniskelamin.length; i++) {
-//                int n = i +1;
-//                System.out.println("sapi ke " + n + " Berumur  " + jeniskel[i]);
-//                n = 0;
-//            }
-        System.out.println();
-
-    }
-
-
-
+//    public void display(int tahun) {
+//        System.out.println("jumlah sapi yang mati " + this.jumlahmati);
+//        System.out.println("jumlah jantan  " + this.jumlahjantan);
+//        System.out.println("jumlah betina  " + this.jumlahbetina);
+//        System.out.println("jumlah sapi total saat ini " + (this.jumlahtotal));
+//        System.out.println("jumlah lahir sapi jantan "+this.jumlahlahirjantan);
+//        System.out.println("jumlah lahir sapi betina "+this.jumlahlahirbetina);
+//
+////        if (this.hidup[tahun] == true) {
+////            for (int i = 0; i < this.hidup.length; i++)
+////                System.out.println("umur sapi " + this.umursapi[i]);
+////            for (int i = 0; i < this.hidup.length; i++)
+////                System.out.println("jenis sapi "+this.jeniskelamin[i]);
+////        }
+//
+//    }
+//
+//
+//}
 }
