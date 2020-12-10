@@ -18,8 +18,23 @@ public class Sapi {
 
     }
 
-    public static void probmati(Sapi sapi) {
-        Random acak = new Random();
+    public static ArrayList<Sapi> kandang(String jenisKelamin, int ada) {
+        ArrayList<Sapi> kandang = new ArrayList<>();
+        for (int i = 0; i < ada; i++) {
+            Sapi anak = new Sapi(jenisKelamin);
+            kandang.add(anak);
+        }
+        return kandang;
+    }
+
+    public static int probangka() {
+        Random rn = new Random();
+        int hasil = rn.nextInt(10);
+//        0->9 ,, 0.5 : 5
+        return hasil;
+    }
+
+    public static int getProbmati(Sapi sapi) {
         int probmati;
         switch (sapi.umur) {
             case 0:
@@ -50,41 +65,32 @@ public class Sapi {
                 probmati = 5;
                 break;
             default:
-                probmati = 1;
+                probmati = 10;
                 break;
         }
-        if (probmati == 1)
-            sapi.mati = true;
-        else if (probmati == 0)
-            sapi.mati = false;
+        return probmati;
+    }
+
+    public boolean setMati(int prob) {
+        Random acak = new Random();
+        if (prob == 10)
+            this.mati = true;
+        else if (prob == 0)
+            this.mati = false;
         else {
             int hasil = acak.nextInt(10);
-            sapi.mati = hasil < probmati;
-
+            this.mati = hasil < prob;
         }
-    }
-
-    public static ArrayList<Sapi> kandang(String jenisKelamin, int ada) {
-        ArrayList<Sapi> kandang = new ArrayList<>();
-        for (int i = 0; i < ada; i++) {
-            Sapi anak = new Sapi(jenisKelamin);
-            kandang.add(anak);
-        }
-        return kandang;
-    }
-
-    public static int probangka() {
-        Random rn = new Random();
-        int hasil = rn.nextInt(10);
-//        0->9 ,, 0.5 : 5
-        return hasil;
+        return this.mati;
     }
 
     public boolean masaSubur(Sapi sapi) {
-        if (sapi.umur >= 3 && sapi.umur <= 7) {
-            this.subur = true;
-        } else
-            this.subur = false;
+        if (sapi.jenisKelamin.equals("betina")){
+            if (sapi.umur >= 3 && sapi.umur <= 7) {
+                this.subur = true;
+            } else
+                this.subur = false;
+        }
         return this.subur;
     }
 
