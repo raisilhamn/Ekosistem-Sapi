@@ -1,8 +1,3 @@
-/**
- * jantan = false
- * betina = true
- */
-
 import java.util.*;
 
 public class Main {
@@ -10,46 +5,48 @@ public class Main {
 
 
     public static void main(String[] args) {
-//        Sapi sapi;
         ArrayList<Sapi> kandang = new ArrayList<>();
         kandang.addAll(Sapi.kandang("jantan", 5));
         kandang.addAll(Sapi.kandang("betina", 10));
         int mati = 0;
+        int lahirjantan = 0;
+        int lahirbetina = 0;
         for (int tahun = 1; tahun < 20; tahun++) {
-            System.out.println("tahun ke - " + tahun + " ====================== ");
+            System.out.println("============== tahun ke - " + tahun + " ====================== ");
             for (int i = 0; i < kandang.size(); i++) {
                 Sapi sapi = kandang.get(i);
-                sapi.nambahUmur(sapi);
-//                System.out.println("umur sapi : "+sapi.umur);
+                System.out.println("umur sapi : " + sapi.umur);
                 int peluang = Sapi.getProbmati(sapi);
-                System.out.println(peluang);
-                if (sapi.setMati(peluang)){
+                if (sapi.setMati(peluang)) {
                     kandang.remove(kandang.get(i));
                     mati++;
 
                 }
 
-                if (sapi.masaSubur(sapi)==true){
+                if (sapi.masaSubur(sapi) == true) {
                     int anak = sapi.melahirkan(sapi);
-                    if (anak >= 60)
-                        kandang.addAll(Sapi.kandang("jantan",1));
-                    else if (anak <60)
-                        kandang.addAll(Sapi.kandang("betina",1));
-                    else if (anak == 102)
+                    if (anak >= 60) {
+                        kandang.addAll(Sapi.kandang("jantan", 1));
+                        lahirjantan++;
+                    } else if (anak < 60) {
+                        kandang.addAll(Sapi.kandang("betina", 1));
+                        lahirbetina++;
+                    } else if (anak == 102)
                         continue;
                 }
-
+                sapi.nambahUmur(sapi);
 
             }
 
-            System.out.println("jumlah sapi tewas "+ mati);
-            System.out.println("ukuran populasi saat ini "+kandang.size());
+
+            System.out.println("total sapi tewas : " + mati);
+            System.out.println("Total sapi  jantan yang pernah lahir  : " + lahirjantan);
+            System.out.println("Total sapi  betina yang pernah lahir : " + lahirbetina);
+            System.out.println("ukuran populasi saat ini : " + kandang.size());
 
 
         }
 
-
-//            int anak = Sapi.
     }
 
 }

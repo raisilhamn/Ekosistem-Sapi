@@ -27,13 +27,6 @@ public class Sapi {
         return kandang;
     }
 
-    public static int probangka() {
-        Random rn = new Random();
-        int hasil = rn.nextInt(10);
-//        0->9 ,, 0.5 : 5
-        return hasil;
-    }
-
     public static int getProbmati(Sapi sapi) {
         int probmati;
         switch (sapi.umur) {
@@ -85,7 +78,7 @@ public class Sapi {
     }
 
     public boolean masaSubur(Sapi sapi) {
-        if (sapi.jenisKelamin.equals("betina")){
+        if (sapi.jenisKelamin.equals("betina")) {
             if (sapi.umur >= 3 && sapi.umur <= 7) {
                 this.subur = true;
             } else
@@ -112,60 +105,4 @@ public class Sapi {
         sapi.umur += 1;
     }
 
-
-//    public Sapi melahirkanAnak() {
-//        Sapi anak;
-////        this.jumlahtotal = this.jumlahjantan + jumlahbetina;
-//        anak = new Sapi(this.jumlahlahirjantan, this.jumlahlahirbetina);
-//        return anak;
-//    }
-//
-//    public void anak() {
-//        for (int i = 0; i < umursapi.length; i++) {
-//            if (this.hidup[i] == false) {
-//                this.jumlahmati +=1;
-//                if (jeniskelamin[i].equals("jantan"))
-//                    jumlahjantan -=1;
-//                else
-//                    jumlahbetina
-
-//            } else {
-//
-//                if (masaSubur(this.umursapi[i])) {
-//                    melahirkan();
-//                    if (kelamin.equals("jantan"))
-//                        this.jumlahlahirjantan += 1;
-//                    else
-//                        this.jumlahlahirbetina += 1;
-//                }
-//
-//                this.jumlahlahirtotal = this.jumlahlahirjantan + jumlahlahirbetina;
-//                melahirkanAnak();
-//
-//            }
-//
-//        }
-//
-//    }
-
-
-//    public void display(int tahun) {
-//        System.out.println("jumlah sapi yang mati " + this.jumlahmati);
-//        System.out.println("jumlah jantan  " + this.jumlahjantan);
-//        System.out.println("jumlah betina  " + this.jumlahbetina);
-//        System.out.println("jumlah sapi total saat ini " + (this.jumlahtotal));
-//        System.out.println("jumlah lahir sapi jantan "+this.jumlahlahirjantan);
-//        System.out.println("jumlah lahir sapi betina "+this.jumlahlahirbetina);
-//
-////        if (this.hidup[tahun] == true) {
-////            for (int i = 0; i < this.hidup.length; i++)
-////                System.out.println("umur sapi " + this.umursapi[i]);
-////            for (int i = 0; i < this.hidup.length; i++)
-////                System.out.println("jenis sapi "+this.jeniskelamin[i]);
-////        }
-//
-//    }
-//
-//
-//}
 }
