@@ -18,14 +18,15 @@ public class Sapi {
 
     }
 
-    public static ArrayList<Sapi> kandang(String jenisKelamin, int ada) {
+    public static ArrayList<Sapi> kandang(String jenisKelamin, int nambah) {
         ArrayList<Sapi> kandang = new ArrayList<>();
-        for (int i = 0; i < ada; i++) {
+        for (int i = 0; i < nambah; i++) {
             Sapi anak = new Sapi(jenisKelamin);
             kandang.add(anak);
         }
         return kandang;
     }
+
 
     public static int getProbmati(Sapi sapi) {
         int probmati;
@@ -73,6 +74,9 @@ public class Sapi {
         else {
             int hasil = acak.nextInt(10);
             this.mati = hasil < prob;
+            // misal
+            // 5 prob 3 => menghasilkan false
+            // false = tidak mati
         }
         return this.mati;
     }
@@ -84,6 +88,7 @@ public class Sapi {
             } else
                 this.subur = false;
         }
+
         return this.subur;
     }
 
@@ -94,7 +99,6 @@ public class Sapi {
                     Random acak = new Random();
                     sapi.jeniskel = acak.nextInt(101);
                     return sapi.jeniskel;
-
                 }
             }
         }
