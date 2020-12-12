@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Sapi {
 
-    boolean mati;
-    String jenisKelamin;
-    int umur;
-    boolean subur;
-    int jeniskel;
+    public boolean mati;
+    public String jenisKelamin;
+    public int umur;
+    public boolean subur;
+    public int jeniskel;
 
 
     public Sapi(String jenisKelamin) {
@@ -20,6 +20,7 @@ public class Sapi {
 
     public static ArrayList<Sapi> kandang(String jenisKelamin, int nambah) {
         ArrayList<Sapi> kandang = new ArrayList<>();
+
         for (int i = 0; i < nambah; i++) {
             Sapi anak = new Sapi(jenisKelamin);
             kandang.add(anak);
@@ -97,16 +98,16 @@ public class Sapi {
             if (sapi.masaSubur(sapi)) {
                 if (sapi.jenisKelamin.equals("betina")) {
                     Random acak = new Random();
-                    sapi.jeniskel = acak.nextInt(101);
+                    sapi.jeniskel = acak.nextInt(100);
                     return sapi.jeniskel;
                 }
             }
         }
-        return sapi.jeniskel = 102;
+        return sapi.jeniskel = 101;
     }
 
     public void nambahUmur(Sapi sapi) {
-        sapi.umur += 1;
+        sapi.umur++;
     }
 
 }
