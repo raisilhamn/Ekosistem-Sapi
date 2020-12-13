@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.zip.DeflaterOutputStream;
 
 public class Main {
     public int tahun;
@@ -34,7 +33,7 @@ public class Main {
         int n = input.nextInt();
         for (int i = 1; i <= n; i++)
             data.add(new ArrayList<>());
-//        Double[][] dataArray = new Double[n][20];
+
         for (int p = 1; p <= 20; p++) {
             System.out.println();
             System.out.println("======================== Siklus ke " + p + " ===========================");
@@ -69,55 +68,34 @@ public class Main {
                 data.get(tahun - 1).add((double) kandang.size());
 
                 totallahirtahunini = lahirbetinatahunini + lahirjantantahunini;
-                System.out.print("sapi jantan lahir tahun ini ada ");
-                hitung.display(lahirjantantahunini);
-                System.out.print("sapi betina lahir tahun ini ada ");
-                hitung.display(lahirbetinatahunini);
-                System.out.print("Total sapi lahir tahun ini ");
-                hitung.display(totallahirtahunini);
-                System.out.print("sapi mati tahun ini ada ");
-                hitung.display(matitahunini);
-                System.out.print("Total sapi tewas : ");
-                hitung.display(mati);
-                System.out.print("Total sapi  jantan yang pernah lahir  : ");
-                hitung.display(lahirjantan);
-                System.out.print("Total sapi  betina yang pernah lahir : ");
-                hitung.display(lahirbetina);
-                System.out.print("ukuran populasi saat ini : ");
-                hitung.display(kandang.size());
+                System.out.println("sapi jantan lahir tahun ini ada " + lahirjantantahunini);
+                System.out.println("sapi betina lahir tahun ini ada " + lahirbetinatahunini);
+                System.out.println("Total sapi lahir tahun ini " + totallahirtahunini);
+                System.out.println("sapi mati tahun ini ada " + matitahunini);
+                System.out.println("Total sapi tewas : " + mati);
+                System.out.println("Total sapi  jantan yang pernah lahir  : " + lahirjantan);
+                System.out.println("Total sapi  betina yang pernah lahir : " + lahirbetina);
+                System.out.println("ukuran populasi saat ini : " + kandang.size());
 
-                lahirjantantahunini = hitung.reset(lahirjantantahunini);
-                lahirbetinatahunini = hitung.reset(lahirbetinatahunini);
-                matitahunini = hitung.reset(matitahunini);
-                totallahirtahunini = hitung.reset(totallahirtahunini);
+                lahirjantantahunini = hitung.reset();
+                lahirbetinatahunini = hitung.reset();
+                matitahunini = hitung.reset();
+                totallahirtahunini = hitung.reset();
 
             }
             kandang.clear();
-            lahirjantan = hitung.reset(lahirjantan);
-            lahirbetina = hitung.reset(lahirbetina);
-            mati = hitung.reset(mati);
+            lahirjantan = hitung.reset();
+            lahirbetina = hitung.reset();
+            mati = hitung.reset();
 
         }
         System.out.println(" _______________________ ");
         for (int i = 0; i < data.size(); i++) {
             int tahun = i + 1;
-            double jumlah = 0.0;
-            double sigma = 0.0;
-            dataA = data.get(i);
-            for (int j = 0; j < dataA.size(); j++) {
-                jumlah += dataA.get(j);
-            }
-            double mean = jumlah / dataA.size();
+            double mean = hitung.Mean(data, i);
             System.out.println("mean tahun ke " + tahun + " = " + mean);
-            for (int k = 0; k < dataA.size(); k++) {
-                sigma = dataA.get(k) - mean;
-                sigma += sigma;
-            }
-
-            double varian = (Math.sqrt((sigma * sigma) / dataA.size()));
+            double varian = hitung.varian(data, i, mean);
             varians.add(varian);
-
-
         }
         for (int i = 0; i < data.size(); i++) {
             int tahun = i + 1;
