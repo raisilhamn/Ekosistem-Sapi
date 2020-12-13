@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
+
 
 public class Sapi {
 
@@ -27,7 +29,6 @@ public class Sapi {
         }
         return kandang;
     }
-
 
     public static int getProbmati(Sapi sapi) {
         int probmati;
@@ -65,7 +66,6 @@ public class Sapi {
         }
         return probmati;
     }
-
     public boolean setMati(int prob) {
         Random acak = new Random();
         if (prob == 10)
@@ -81,7 +81,6 @@ public class Sapi {
         }
         return this.mati;
     }
-
     public boolean masaSubur(Sapi sapi) {
         if (sapi.jenisKelamin.equals("betina")) {
             if (sapi.umur >= 3 && sapi.umur <= 7) {
@@ -92,7 +91,6 @@ public class Sapi {
 
         return this.subur;
     }
-
     public int melahirkan(Sapi sapi) {
         if (sapi.mati == false) {
             if (sapi.masaSubur(sapi)) {
@@ -105,7 +103,6 @@ public class Sapi {
         }
         return sapi.jeniskel = 101;
     }
-
     public void nambahUmur(Sapi sapi) {
         sapi.umur++;
     }
