@@ -1,7 +1,5 @@
 import java.util.*;
 
-import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
-
 
 public class Sapi {
 

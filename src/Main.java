@@ -1,9 +1,8 @@
 import java.util.*;
 
 public class Main {
-    public int tahun;
 
-    /* !! Eror di tracking penambahan umur,kadang benar kadang engga
+    /*
      *
      * @param args
      */
@@ -23,10 +22,10 @@ public class Main {
         int lahirbetina = 0;
         int lahirjantantahunini = 0;
         int lahirbetinatahunini = 0;
-        int totallahirtahunini = 0;
+        int totallahirtahunini;
         int matitahunini = 0;
         int cuacaburuk = 0;
-        double sum = 0.0;
+
         Sapi sapi;
 
         System.out.print("Input tahun : ");
@@ -42,7 +41,7 @@ public class Main {
             for (int tahun = 1; tahun <= n; tahun++) {
                 System.out.println("------  tahun ke - " + tahun + " ------ ");
                 boolean cuaca = Sapi.cuaca();
-                if (cuaca == true) {
+                if (cuaca) {
                     cuacaburuk += 1;
                     System.out.println("---------------");
                     System.out.println("| cuaca buruk |");
@@ -51,12 +50,12 @@ public class Main {
                 for (int i = 0; i < kandang.size(); i++) {
                     sapi = kandang.get(i);
                     int peluang = Sapi.getProbmati(sapi, cuaca);
-                    if (sapi.setMati(peluang) == true) {
+                    if (sapi.setMati(peluang)) {
                         kandang.remove(kandang.get(i));
                         mati++;
                         matitahunini++;
                     }
-                    if (sapi.masaSubur(sapi) == true) {
+                    if (sapi.masaSubur(sapi)) {
                         int anak = sapi.melahirkan(sapi);
                         if (anak >= 60) {
                             kandang.addAll(Sapi.kandang("jantan", 1));
@@ -69,7 +68,7 @@ public class Main {
                         } else if (anak == 102)
                             continue;
                     }
-                    if (sapi.mati == false)
+                    if (!sapi.mati)
                         sapi.nambahUmur(sapi);
                 }
                 data.get(tahun - 1).add((double) kandang.size());
