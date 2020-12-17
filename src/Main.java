@@ -8,7 +8,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         ArrayList<Sapi> kandang = new ArrayList<>();
         ArrayList<ArrayList<Double>> data = new ArrayList<>();
         ArrayList<Double> dataCuaca = new ArrayList<>();
@@ -24,7 +23,6 @@ public class Main {
             data.add(new ArrayList<>());
         for (int p = 1; p <= 20; p++) {
             int totalcuacaburuksiklusini = 0;
-//            dataCuaca.add(new ArrayList<>());
             System.out.println();
             System.out.println(ANSI_BLUE + "======================== Siklus ke " + p + " ===========================" + ANSI_RESET);
             kandang.addAll(Sapi.kandang("jantan", 5));
@@ -51,7 +49,6 @@ public class Main {
                     if (sapi.setMati(peluang)) {
                         kandang.remove(kandang.get(i));
                         matitahunini++;
-
                     }
                     if (sapi.masaSubur(sapi)) {
                         int anak = sapi.melahirkan(sapi);
@@ -80,19 +77,15 @@ public class Main {
                 System.out.println("total lahir tahun ini : " + totallahirtahunini);
                 System.out.println("jumlah sapi jantan tahun ini : " + populasijantantahunini);
                 System.out.println("jumlah sapi betina tahun ini : " + populasibetinatahunini);
-
                 System.out.println("ukuran populasi saat ini : " + kandang.size());
 
 
             }
-
             dataCuaca.add((double) cuacaburuk);
-
             System.out.println();
             System.out.println(ANSI_RED + "terjadi cuaca buruk sebanyak : " + cuacaburuk + " kali dalam siklus ini" + ANSI_RESET);
             cuacaburuk = hitung.reset();
             kandang.clear();
-
         }
         System.out.println(" _______________________ ");
         for (int i = 0; i < data.size(); i++) {
