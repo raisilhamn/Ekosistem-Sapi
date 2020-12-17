@@ -30,42 +30,97 @@ public class Sapi {
         return kandang;
     }
 
-    public static int getProbmati(Sapi sapi) {
+    public static boolean cuaca() {
+        Random acak = new Random();
+        int hasil = acak.nextInt(10);
+        int buruk = 3; // 30 persen kemungkinan terjadi cuaca buruk pada tiap tahun
+        boolean cuacaBuruk;
+        cuacaBuruk = hasil < buruk;
+        // false = cuaca tidak buruk
+        return cuacaBuruk;
+
+
+    }
+
+    /*
+     * Jika terjadi cuaca buruk, probabilitas kematian akan naik 10%
+     */
+    public static int getProbmati(Sapi sapi, boolean cuaca) {
         int probmati;
-        switch (sapi.umur) {
-            case 0:
-                probmati = 0;
-                break;
-            case 1:
-                probmati = 1;
-                break;
-            case 2:
-                probmati = 1;
-                break;
-            case 3:
-                probmati = 2;
-                break;
-            case 4:
-                probmati = 2;
-                break;
-            case 5:
-                probmati = 3;
-                break;
-            case 6:
-                probmati = 3;
-                break;
-            case 7:
-                probmati = 4;
-                break;
-            case 8:
-                probmati = 5;
-                break;
-            default:
-                probmati = 10;
-                break;
+        if (cuaca == false) {
+            switch (sapi.umur) {
+                case 0:
+                    probmati = 0;
+                    break;
+                case 1:
+                    probmati = 1;
+                    break;
+                case 2:
+                    probmati = 1;
+                    break;
+                case 3:
+                    probmati = 2;
+                    break;
+                case 4:
+                    probmati = 2;
+                    break;
+                case 5:
+                    probmati = 3;
+                    break;
+                case 6:
+                    probmati = 3;
+                    break;
+                case 7:
+                    probmati = 4;
+                    break;
+                case 8:
+                    probmati = 5;
+                    break;
+                default:
+                    probmati = 10;
+                    break;
+            }
+        } else {
+            switch (sapi.umur) {
+                case 0:
+                    probmati = 1;
+                    break;
+                case 1:
+                    probmati = 2;
+                    break;
+                case 2:
+                    probmati = 2;
+                    break;
+                case 3:
+                    probmati = 3;
+                    break;
+                case 4:
+                    probmati = 3;
+                    break;
+                case 5:
+                    probmati = 4;
+                    break;
+                case 6:
+                    probmati = 4;
+                    break;
+                case 7:
+                    probmati = 5;
+                    break;
+                case 8:
+                    probmati = 6;
+                    break;
+                default:
+                    probmati = 10;
+                    break;
+
+
+            }
+
+
         }
         return probmati;
     }
+
     public boolean setMati(int prob) {
         Random acak = new Random();
         if (prob == 10)
@@ -76,11 +131,12 @@ public class Sapi {
             int hasil = acak.nextInt(10);
             this.mati = hasil < prob;
             // misal
-            // 5 prob 3 => menghasilkan false
+            // 5 < 3 => menghasilkan false
             // false = tidak mati
         }
         return this.mati;
     }
+
     public boolean masaSubur(Sapi sapi) {
         if (sapi.jenisKelamin.equals("betina")) {
             if (sapi.umur >= 3 && sapi.umur <= 7) {
@@ -91,6 +147,7 @@ public class Sapi {
 
         return this.subur;
     }
+
     public int melahirkan(Sapi sapi) {
         if (sapi.mati == false) {
             if (sapi.masaSubur(sapi)) {
@@ -103,6 +160,7 @@ public class Sapi {
         }
         return sapi.jeniskel = 101;
     }
+
     public void nambahUmur(Sapi sapi) {
         sapi.umur++;
     }

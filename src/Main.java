@@ -13,8 +13,8 @@ public class Main {
 
         ArrayList<Sapi> kandang = new ArrayList<>();
         ArrayList<ArrayList<Double>> data = new ArrayList<>();
+        ArrayList<ArrayList<Double>> dataCuaca = new ArrayList<>();
         ArrayList<Double> varians = new ArrayList<>();
-        ArrayList<Double> dataA = new ArrayList<>();
         Perhitungan hitung = new Perhitungan();
         Scanner input = new Scanner(System.in);
 
@@ -25,25 +25,32 @@ public class Main {
         int lahirbetinatahunini = 0;
         int totallahirtahunini = 0;
         int matitahunini = 0;
+        int cuacaburuk = 0;
         double sum = 0.0;
-        double nilairata2 = 0.0;
         Sapi sapi;
 
         System.out.print("Input tahun : ");
         int n = input.nextInt();
         for (int i = 1; i <= n; i++)
             data.add(new ArrayList<>());
-
         for (int p = 1; p <= 20; p++) {
+            dataCuaca.add(new ArrayList<>());
             System.out.println();
             System.out.println("======================== Siklus ke " + p + " ===========================");
             kandang.addAll(Sapi.kandang("jantan", 5));
             kandang.addAll(Sapi.kandang("betina", 10));
             for (int tahun = 1; tahun <= n; tahun++) {
-                System.out.println("------ tahun ke - " + tahun + " ------ ");
+                System.out.println("------  tahun ke - " + tahun + " ------ ");
+                boolean cuaca = Sapi.cuaca();
+                if (cuaca == true) {
+                    cuacaburuk += 1;
+                    System.out.println("---------------");
+                    System.out.println("| cuaca buruk |");
+                    System.out.println("---------------");
+                }
                 for (int i = 0; i < kandang.size(); i++) {
                     sapi = kandang.get(i);
-                    int peluang = Sapi.getProbmati(sapi);
+                    int peluang = Sapi.getProbmati(sapi, cuaca);
                     if (sapi.setMati(peluang) == true) {
                         kandang.remove(kandang.get(i));
                         mati++;
@@ -66,7 +73,6 @@ public class Main {
                         sapi.nambahUmur(sapi);
                 }
                 data.get(tahun - 1).add((double) kandang.size());
-
                 totallahirtahunini = lahirbetinatahunini + lahirjantantahunini;
                 System.out.println("sapi jantan lahir tahun ini ada " + lahirjantantahunini);
                 System.out.println("sapi betina lahir tahun ini ada " + lahirbetinatahunini);
@@ -76,31 +82,39 @@ public class Main {
                 System.out.println("Total sapi  jantan yang pernah lahir  : " + lahirjantan);
                 System.out.println("Total sapi  betina yang pernah lahir : " + lahirbetina);
                 System.out.println("ukuran populasi saat ini : " + kandang.size());
-
                 lahirjantantahunini = hitung.reset();
                 lahirbetinatahunini = hitung.reset();
                 matitahunini = hitung.reset();
                 totallahirtahunini = hitung.reset();
-
             }
+            dataCuaca.get(p - 1).add((double) cuacaburuk);
+            System.out.println("terjadi cuaca buruk sebanyak : " + cuacaburuk + " kali dalam siklus ini");
+            cuacaburuk = hitung.reset();
             kandang.clear();
             lahirjantan = hitung.reset();
             lahirbetina = hitung.reset();
             mati = hitung.reset();
-
         }
         System.out.println(" _______________________ ");
         for (int i = 0; i < data.size(); i++) {
             int tahun = i + 1;
             double mean = hitung.Mean(data, i);
-            System.out.println("mean tahun ke " + tahun + " = " + mean);
+            System.out.println("Rata rata jumlah sapi tahun ke " + tahun + " = " + mean);
             double varian = hitung.varian(data, i, mean);
             varians.add(varian);
         }
+        System.out.println();
         for (int i = 0; i < data.size(); i++) {
             int tahun = i + 1;
-            System.out.println("varian tahun ke " + tahun + " = " + varians.get(i));
+            System.out.println("varian jumlah sapi tahun ke " + tahun + " = " + varians.get(i));
         }
+        System.out.println();
+        for (int i = 0; i < dataCuaca.size(); i++) {
+            int tahun = i + 1;
+            double mean = hitung.Mean(dataCuaca, i);
+            System.out.println("Rata rata terjadinya cuaca buruk di siklus ke " + tahun + " = " + mean);
+        }
+
     }
 
 }
