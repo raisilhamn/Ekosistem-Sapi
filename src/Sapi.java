@@ -36,8 +36,6 @@ public class Sapi {
         cuacaBuruk = hasil < buruk;
         // false = cuaca tidak buruk
         return cuacaBuruk;
-
-
     }
 
     /*
@@ -110,11 +108,7 @@ public class Sapi {
                 default:
                     probmati = 10;
                     break;
-
-
             }
-
-
         }
         return probmati;
     }

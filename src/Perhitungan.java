@@ -13,6 +13,12 @@ public class Perhitungan {
         return jumlah / dataA.size();
     }
 
+    public static double MeanCuaca(ArrayList<Double> data, int i, int tahun) {
+        double jumlah = 0.0;
+        jumlah = data.get(i);
+        return jumlah / tahun;
+    }
+
     public static double varian(ArrayList<ArrayList<Double>> data, int i, double mean) {
         double sigma = 0.0;
         ArrayList<Double> dataA;
