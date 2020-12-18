@@ -160,7 +160,7 @@ public class Sapi {
             if (sapi.masaSubur(sapi)) {
                 if (sapi.jenisKelamin.equals("betina")) {
                     Random acak = new Random();
-                    sapi.jeniskel = acak.nextInt(100);
+                    sapi.jeniskel = acak.nextInt(101); // mengacak bilangan bulat dari 0 - 100
                     return sapi.jeniskel;
                 } else
                     return sapi.jeniskel = 101;
