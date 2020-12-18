@@ -162,10 +162,12 @@ public class Sapi {
                     Random acak = new Random();
                     sapi.jeniskel = acak.nextInt(100);
                     return sapi.jeniskel;
-                }
-            }
-        }
-        return sapi.jeniskel = 101; // mengembalikan angka 101 pada variabel sapi.jeniskel
+                } else
+                    return sapi.jeniskel = 101;
+            } else
+                return sapi.jeniskel = 101;
+        } else
+            return sapi.jeniskel = 101;
     }
 
     public void nambahUmur(Sapi sapi) {

@@ -58,8 +58,7 @@ public class Main {
                         } else if (anak < 60) {
                             kandang.addAll(Sapi.kandang("betina", 1));
                             lahirbetinatahunini++;
-                        } else if (anak == 102)
-                            continue;
+                        }
                     }
                     if (!sapi.mati)
                         sapi.nambahUmur(sapi);
